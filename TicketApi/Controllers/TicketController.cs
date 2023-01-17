@@ -30,7 +30,7 @@ namespace TicketApi.Controllers
             return Ok(ticket);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public void CreateTicket(
             string Title, string Description, double Price)
         {
@@ -38,6 +38,14 @@ namespace TicketApi.Controllers
             ticketRepository.SaveChangesAsync();
 
         }
+        [HttpDelete("delete/{ticketId}")]
+        public async Task<ActionResult> DeleteTicket(int ticketId)
+        {
+            ticketRepository.DeleteTicket(ticketId);
+            await ticketRepository.SaveChangesAsync();
+            return NoContent();
+        }
+        //add ticket to user
         
     }
 }
