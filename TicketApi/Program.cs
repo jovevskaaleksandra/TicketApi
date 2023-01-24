@@ -18,10 +18,16 @@ builder.Services.AddDbContext<TicketContext>(
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
-
+builder.Services.AddCors(f => f.AddPolicy("AllowAll", builder =>
+{
+    builder.AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowCredentials()
+           .SetIsOriginAllowed(_ => true);
+}));
 
 var app = builder.Build();
-
+app.UseCors("AllowAll");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

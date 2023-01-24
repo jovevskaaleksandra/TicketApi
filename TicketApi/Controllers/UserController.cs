@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TicketApi.Entities;
 using TicketApi.Repositories;
 using TicketApi.Repositories.Implementation;
 
@@ -22,5 +23,13 @@ namespace TicketApi.Controllers
             var user = await _userRepository.GetUserAsync(userId);
             return Ok(user);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            var users = _userRepository.GetUsersAsync();
+            return Ok(users);
+        }
+
     }
 }

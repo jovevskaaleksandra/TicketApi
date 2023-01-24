@@ -20,6 +20,11 @@ namespace TicketApi.Repositories.Implementation
             
         }
 
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            return await _ticketContext.Users.OrderBy(c => c.Username).ToListAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _ticketContext.SaveChangesAsync() >= 0);

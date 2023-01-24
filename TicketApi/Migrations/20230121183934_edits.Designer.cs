@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketApi.DbContexts;
 
@@ -10,9 +11,10 @@ using TicketApi.DbContexts;
 namespace TicketApi.Migrations
 {
     [DbContext(typeof(TicketContext))]
-    partial class TicketContextModelSnapshot : ModelSnapshot
+    [Migration("20230121183934_edits")]
+    partial class edits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -27,9 +29,8 @@ namespace TicketApi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -49,14 +50,14 @@ namespace TicketApi.Migrations
                         {
                             Id = 3,
                             Description = "It focuses on the transformation of his youngest son, Michael Corleone (Pacino), from reluctant family outsider to ruthless mafia boss",
-                            Price = "10",
+                            Price = 10.0,
                             Title = "The Godfather 1"
                         },
                         new
                         {
                             Id = 4,
                             Description = "Part II develops this theme further, showing us how the Corleone family operates within a political framework.",
-                            Price = "10",
+                            Price = 10.0,
                             Title = "The Godfather 2"
                         });
                 });

@@ -26,7 +26,7 @@ namespace TicketApi.Repositories.Implementation
             }
         }
 
-        public void CreateTicket(string Title, string Description, double Price)
+        public void CreateTicket(string Title, string Description, string Price)
         {
             Ticket ticket = new Ticket();
             ticket.Title = Title;
@@ -35,16 +35,18 @@ namespace TicketApi.Repositories.Implementation
             _ticketContext.Tickets.Add(ticket);
         }
 
-        public void DeleteTicket(int ticketId)
+        public async Task DeleteTicketAsync(int ticketId)
         {
-            var ticket = _ticketContext.Tickets.Where(c => c.Id == ticketId);
+            var ticket = await GetTicketAsync(ticketId);
             _ticketContext.Remove(ticket);
+            await _ticketContext.SaveChangesAsync();
         }
 
         public async Task<Ticket> GetTicketAsync(int ticketId)
         {
-            return await _ticketContext.Tickets.Where(c => c.Id == ticketId).FirstOrDefaultAsync() ??
+            var test = await _ticketContext.Tickets.Where(c => c.Id == ticketId).FirstOrDefaultAsync() ??
                 throw new ArgumentNullException(nameof(ticketId));
+            return test;
         }
 
         public async Task<IEnumerable<Ticket>> GetTicketsAsync()

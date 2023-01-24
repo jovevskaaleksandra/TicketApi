@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketApi.Entities;
+using TicketApi.Model;
 using TicketApi.Repositories;
 
 namespace TicketApi.Controllers
 {
     [Route("api/tickets")]
     [ApiController]
+    [EnableCors]
     public class TicketController : ControllerBase
     {
         private readonly ITicketRepository ticketRepository;
@@ -31,18 +34,16 @@ namespace TicketApi.Controllers
         }
 
         [HttpPost("create")]
-        public void CreateTicket(
-            string Title, string Description, double Price)
+        public void CreateTicket([FromBody] CreateTicketRequest request)
         {
-            ticketRepository.CreateTicket(Title, Description, Price);
+            ticketRepository.CreateTicket(request.Title, request.Description, request.Price);
             ticketRepository.SaveChangesAsync();
 
         }
         [HttpDelete("delete/{ticketId}")]
         public async Task<ActionResult> DeleteTicket(int ticketId)
         {
-            ticketRepository.DeleteTicket(ticketId);
-            await ticketRepository.SaveChangesAsync();
+            await ticketRepository.DeleteTicketAsync(ticketId);
             return NoContent();
         }
         //add ticket to user

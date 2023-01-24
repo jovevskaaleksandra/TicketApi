@@ -7,8 +7,8 @@ namespace TicketApi.Repositories
         Task<IEnumerable<Ticket>> GetTicketsAsync();
         Task<Ticket> GetTicketAsync(int ticketId);
 
-        void CreateTicket(string Title, string Description, double Price);
-        void DeleteTicket(int ticketId);
+        void CreateTicket(string Title, string Description, string Price);
+        Task DeleteTicketAsync(int ticketId);
 
         Task AddTicketToUserAsync(int userId, int ticketId);
 

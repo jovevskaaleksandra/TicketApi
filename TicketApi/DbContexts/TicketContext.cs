@@ -36,15 +36,17 @@ namespace TicketApi.DbContexts
                 {
                     Id = 3,
                     Title = "The Godfather 1",
-                    Description = "posle ke smenam descriptions",
-                    Price = 10.00
+                    Description = "It focuses on the transformation of his youngest son, " +
+                    "Michael Corleone (Pacino), from reluctant family outsider to ruthless mafia boss",
+                    Price = "10"
                 },
                 new Ticket()
                 {
                     Id = 4,
                     Title = "The Godfather 2",
-                    Description = "posle ke smenam descriptions",
-                    Price = 10.00
+                    Description = "Part II develops this theme further, showing us how the Corleone family " +
+                    "operates within a political framework.",
+                    Price = "10"
                 });
             base.OnModelCreating(modelBuilder);
         }
